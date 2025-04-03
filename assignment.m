@@ -93,5 +93,12 @@ FRF = 1/(-Jeq*Omega^2 - ceq*Omega*j + keq);
 mod_FRF = abs(FRF);
 phase_FRF = angle(FRF);
 % 5h
+FRF_5 = (omega_0^2 - Omega^2 + 2*j*omega_0*hb*Omega)/(Jeq*(omega_0^2-Omega^2)^2 + (2*omega_0*hb*Omega)^2);
+mod_FRF5 = abs(FRF_5);
+phase_FRF5 = angle(FRF_5);
+% 25h
+FRF_25 = (omega_0^2 - Omega^2 + 2*j*omega_0*hc*Omega)/(Jeq*(omega_0^2-Omega^2)^2 + (2*omega_0*hc*Omega)^2);
+mod_FRF25 = abs(FRF_25);
+phase_FRF25 = angle(FRF_25);
 
 %theta_p = mod_FRF * C_0 * cos(Omega*t + phi + angle(FRF)*j); 
