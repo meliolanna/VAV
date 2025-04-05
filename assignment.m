@@ -22,7 +22,21 @@ k2 = 2300;  % elastic coeff, [N/m]
 c2 = 35;    % damping coef, [Ns/m]
 k3 = 2500;  % elastic coeff, [N/m]
 c3 = 20;    % damping coef, [Ns/m]
-
+%parameters
+A0 = 200;   % [Nm]
+f0 = 1;     % [Hz]
+phi0 = pi/3;
+Ai = 200;
+fi = [0.5, 20];
+B1 = 400;
+f1 = 0.65;
+phi1 = -pi/2;
+B2 = 44.4;
+f2 = 1.95;
+phi2 = pi/2;
+B3 = 16;
+f3 = 3.25;
+phi3 = -pi/2;
 
 % 1.a
 Jeq = (m1*(R2^2))/4 + J1*(R2/(2*Ra))^2 + J2;
