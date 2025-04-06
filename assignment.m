@@ -99,20 +99,89 @@ title('Time response using 25h','Fontsize',12);
 
 % FORCED MOTION
 % 3.a 
-Omega = 1; %valore a caso
-phi = 3; % valore a caso
-
+freq = linspace(0,50, 500); %frequenze per rappresentare
 % h
-FRF = 1/(-Jeq*Omega^2 - ceq*Omega*j + keq);
+FRF = 1./(-Jeq*freq.^2 - ceq*freq.*j + keq);
 mod_FRF = abs(FRF);
 phase_FRF = angle(FRF);
 % 5h
-FRF_5 = (omega_0^2 - Omega^2 + 2*j*omega_0*hb*Omega)/(Jeq*(omega_0^2-Omega^2)^2 + (2*omega_0*hb*Omega)^2);
+FRF_5 = (omega_0^2 - freq.^2 + 2*j*omega_0*hb.*freq)./(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hb.*freq).^2);
 mod_FRF5 = abs(FRF_5);
 phase_FRF5 = angle(FRF_5);
 % 25h
-FRF_25 = (omega_0^2 - Omega^2 + 2*j*omega_0*hc*Omega)/(Jeq*(omega_0^2-Omega^2)^2 + (2*omega_0*hc*Omega)^2);
+FRF_25 = (omega_0^2 - freq.^2 + 2*j*omega_0*hc.*freq)/(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hc.*freq).^2);
 mod_FRF25 = abs(FRF_25);
 phase_FRF25 = angle(FRF_25);
 
-%theta_p = mod_FRF * C_0 * cos(Omega*t + phi + angle(FRF)*j); 
+%questi grafici fanno tremendamente schifo ma intanto li abbozzo
+figure(4)
+subplot(321)
+plot(freq, mod_FRF);
+grid minor
+xlabel("\Omega [rad/s]");
+ylabel("|H(\Omega)| [rad/N]");
+subplot(322)
+plot(freq, phase_FRF);
+grid minor
+xlabel("\Omega [rad/s]");
+ylabel("Phase H(\Omega) rad")
+
+subplot(323)
+plot(freq, mod_FRF5);
+grid minor
+xlabel("\Omega [rad/s]");
+ylabel("|H5(\Omega)| [rad/N]");
+subplot(324)
+plot(freq, phase_FRF5);
+grid minor
+xlabel("\Omega [rad/s]");
+ylabel("Phase H5(\Omega) rad")
+
+subplot(325) %non so perchè non vada, daje
+plot(freq, mod_FRF25);
+grid minor
+xlabel("\Omega [rad/s]");
+ylabel("|H25(\Omega)| [rad/N]");
+subplot(326)
+plot(freq, phase_FRF25);
+grid minor
+xlabel("\Omega [rad/s]");
+ylabel("Phase H25(\Omega) rad")
+
+% 3.b
+Omega = 2*pi*1; %valore a caso
+phi = pi/3; % valore a caso
+
+FRF_Omega = 1/(-Jeq*Omega^2 - ceq*Omega*j + keq);
+theta_p = abs(FRF_Omega) * A * cos(Omega*t + phi + angle(FRF_Omega)*j); 
+theta_tr = theta_2 + theta_p;
+
+figure(5)
+plot(t,theta_tr); 
+grid minor
+xlabel('Time [s]'); 
+ylabel('Angular displacement [rad]');
+title('Time response to the torque','Fontsize',12);
+
+% 3.c
+Omegai1 = 2*pi*0.5;
+Omegai2 = 2*pi*20;
+
+FRF_Oi1 = 1/(-Jeq*Omegai1^2 - ceq*Omegai1*1j + keq);
+theta_tri1 = theta_2 + abs(FRF_Oi1) * A * cos(Omegai1*t + angle(FRF_Oi1)*1j); 
+FRF_Oi2 = 1/(-Jeq*Omegai2^2 - ceq*Omegai2*1j + keq);
+theta_tri2 = theta_2 + abs(FRF_Oi2) * A * cos(Omegai2*t + angle(FRF_Oi2)*1j); 
+
+figure(6)
+subplot(1,2,1)
+plot(t, theta_tri1)
+grid minor
+xlabel('Time [s]'); 
+ylabel('Angular displacement [rad]');
+subplot(1,2,2)
+plot(t, theta_tri2)
+grid minor
+xlabel('Time [s]'); 
+ylabel('Angular displacement [rad]');
+
+%3.d
