@@ -109,7 +109,7 @@ FRF_5 = (omega_0^2 - freq.^2 + 2*j*omega_0*hb.*freq)./(Jeq*(omega_0^2-freq.^2).^
 mod_FRF5 = abs(FRF_5);
 phase_FRF5 = angle(FRF_5);
 % 25h
-FRF_25 = (omega_0^2 - freq.^2 + 2*j*omega_0*hc.*freq)/(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hc.*freq).^2);
+FRF_25 = (omega_0^2 - freq.^2 + 2*j*omega_0*hc.*freq)./(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hc.*freq).^2);
 mod_FRF25 = abs(FRF_25);
 phase_FRF25 = angle(FRF_25);
 
