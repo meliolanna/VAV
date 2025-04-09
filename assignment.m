@@ -83,11 +83,16 @@ ylabel('Angular displacement [rad]','Fontsize',10);
 %legend('Sinusoidal','Exponential','Fontsize',9)
 title('Time response using 5h','Fontsize',12);
 
-% 2.c (using 25h)
+% 2.c (using 25h) SBaaaaagliato
 hc = 25*h;
-omega_dc = omega_0 * sqrt(1-hc^2); 
+%omega_dc = omega_0 * sqrt(1-hc^2); 
 alphac = hc*omega_0;
-theta_2c = exp(-alphac*t) .* (A*cos(omega_dc*t) + B*sin(omega_dc*t));
+L1 = -alphac + sqrt(alphac^2 - omega_0^2);
+L2 = -alphac - sqrt(alphac^2 - omega_0^2);
+T1 = (theta_20*L2 - omega_20)/(L2-L1);
+T2 = (theta_20*L1 - omega_20)/(L1 - L2);
+%theta_2c = exp(-alphac*t) .* (A*cos(omega_dc*t) + B*sin(omega_dc*t));
+theta_2c = T1*exp(L1*t) + T2*exp(L2*t);
 
 figure(3)
 plot(t,theta_2c,'g','LineWidth',1.2); 
@@ -137,7 +142,7 @@ grid minor
 xlabel("\Omega [rad/s]");
 ylabel("Phase H5(\Omega) rad")
 
-subplot(325) %non so perchè non vada, daje
+subplot(325) 
 plot(freq, mod_FRF25);
 grid minor
 xlabel("\Omega [rad/s]");
@@ -172,7 +177,7 @@ theta_tri1 = theta_2 + abs(FRF_Oi1) * A * cos(Omegai1*t + angle(FRF_Oi1)*1j);
 FRF_Oi2 = 1/(-Jeq*Omegai2^2 - ceq*Omegai2*1j + keq);
 theta_tri2 = theta_2 + abs(FRF_Oi2) * A * cos(Omegai2*t + angle(FRF_Oi2)*1j); 
 
-figure(6)
+figure(6) %Spoiler: vengono ancora tutti uguali ma non dovrebbero
 subplot(1,2,1)
 plot(t, theta_tri1)
 grid minor
