@@ -102,19 +102,29 @@ ylabel('Angular displacement [rad]','Fontsize',10);
 %legend('Sinusoidal','Exponential','Fontsize',9)
 title('Time response using 25h','Fontsize',12);
 
+figure(7)
+plot(t, theta_2, 'r')
+grid minor
+hold on
+plot(t, theta_2b, 'b')
+hold on
+plot(t, theta_2c, 'g')
+xlabel('Time [s]', 'FontSize',10)
+ylabel('Angular displacement [rad]', 'FontSize', 10)
+
 % FORCED MOTION
 % 3.a 
 freq = linspace(0,50, 500); %frequenze per rappresentare
 % h
-FRF = 1./(-Jeq*freq.^2 - ceq*freq.*j + keq);
+FRF = 1./(-Jeq*freq.^2 - ceq*freq.*1i + keq);
 mod_FRF = abs(FRF);
 phase_FRF = angle(FRF);
 % 5h
-FRF_5 = (omega_0^2 - freq.^2 + 2*j*omega_0*hb.*freq)./(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hb.*freq).^2);
+FRF_5 = (omega_0^2 - freq.^2 + 2*1i*omega_0*hb.*freq)./(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hb.*freq).^2);
 mod_FRF5 = abs(FRF_5);
 phase_FRF5 = angle(FRF_5);
 % 25h
-FRF_25 = (omega_0^2 - freq.^2 + 2*j*omega_0*hc.*freq)./(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hc.*freq).^2);
+FRF_25 = (omega_0^2 - freq.^2 + 2*1i*omega_0*hc.*freq)./(Jeq*(omega_0^2-freq.^2).^2 + (2*omega_0*hc.*freq).^2);
 mod_FRF25 = abs(FRF_25);
 phase_FRF25 = angle(FRF_25);
 
@@ -153,12 +163,13 @@ grid minor
 xlabel("\Omega [rad/s]");
 ylabel("Phase H25(\Omega) rad")
 
+
 % 3.b
 Omega = 2*pi*1; %valore a caso
 phi = pi/3; % valore a caso
 
-FRF_Omega = 1/(-Jeq*Omega^2 - ceq*Omega*j + keq);
-theta_p = abs(FRF_Omega) * A * cos(Omega*t + phi + angle(FRF_Omega)*j); 
+FRF_Omega = 1/(-Jeq*Omega^2 - ceq*Omega*1i + keq);
+theta_p = abs(FRF_Omega) * A * cos(Omega*t + phi + angle(FRF_Omega)*1i); 
 theta_tr = theta_2 + theta_p;
 
 figure(5)
