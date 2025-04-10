@@ -169,7 +169,7 @@ Omega = 2*pi*1; %valore a caso
 phi = pi/3; % valore a caso
 
 FRF_Omega = 1/(-Jeq*Omega^2 - ceq*Omega*1i + keq);
-theta_p = abs(FRF_Omega) * A * cos(Omega*t + phi + angle(FRF_Omega)*1i); 
+theta_p = abs(FRF_Omega) * A0 * cos(Omega*t + phi + angle(FRF_Omega)*1i); %qui credo ci andasse A0 e non A e così viene, credo
 theta_tr = theta_2 + theta_p;
 
 figure(5)
@@ -184,9 +184,9 @@ Omegai1 = 2*pi*0.5;
 Omegai2 = 2*pi*20;
 
 FRF_Oi1 = 1/(-Jeq*Omegai1^2 - ceq*Omegai1*1j + keq);
-theta_tri1 = theta_2 + abs(FRF_Oi1) * A * cos(Omegai1*t + angle(FRF_Oi1)*1j); 
+theta_tri1 = theta_2 + abs(FRF_Oi1) * A0 * cos(Omegai1*t + angle(FRF_Oi1)*1j); 
 FRF_Oi2 = 1/(-Jeq*Omegai2^2 - ceq*Omegai2*1j + keq);
-theta_tri2 = theta_2 + abs(FRF_Oi2) * A * cos(Omegai2*t + angle(FRF_Oi2)*1j); 
+theta_tri2 = theta_2 + abs(FRF_Oi2) * A0 * cos(Omegai2*t + angle(FRF_Oi2)*1j); 
 
 figure(6) %Spoiler: vengono ancora tutti uguali ma non dovrebbero
 subplot(1,2,1)
